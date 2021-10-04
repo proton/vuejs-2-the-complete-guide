@@ -2,15 +2,15 @@
   <section>
     <h2>My friends</h2>
     <ul>
-      <li v-for="friend in friends" :key="friend.id">
-        {{ friend.name }}
-      </li>
+      <friend-contact v-for="friend in friends" :key="friend.id" :friend="friend"></friend-contact>
     </ul>
   </section>
 </template>
 
 <script>
+import FriendContact from './components/FriendContact.vue'
 export default {
+  components: { FriendContact },
   data() {
     return {
       friends: [
