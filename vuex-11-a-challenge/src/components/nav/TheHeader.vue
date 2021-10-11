@@ -26,14 +26,20 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
-  inject: ['login', 'logout'],
   computed: {
     ...mapGetters([
       'isLoggedIn',
       'cart',
     ])
+  },
+  methods: {
+    ...mapMutations([
+      'login',
+      'logout'
+    ]),
   },
 }
 </script>
