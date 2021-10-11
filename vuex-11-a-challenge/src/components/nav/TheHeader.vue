@@ -25,9 +25,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  inject: ['isLoggedIn', 'login', 'logout', 'cart'],
-};
+  inject: ['login', 'logout'],
+  computed: {
+    ...mapGetters([
+      'isLoggedIn',
+      'cart',
+    ])
+  },
+}
 </script>
 
 <style scoped>
