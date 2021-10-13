@@ -20,32 +20,48 @@
 </template>
 
 <script>
+import { ref, computed, watch } from 'vue'
+
 export default {
-  data() {
-    return {
-      availableFunds: 100,
-      currentExpenses: 0,
-      enteredExpense: 0,
-    };
-  },
-  computed: {
-    remainingFunds() {
-      return this.availableFunds - this.currentExpenses;
-    },
-  },
-  methods: {
-    addExpense() {
-      this.currentExpenses += this.enteredExpense;
-    },
-  },
-  watch: {
-    remainingFunds(val) {
-      if (val < 0) {
-        alert('You are broke!');
-      }
-    },
-  },
-};
+  setup() {
+    const availableFunds = ref(100)
+    const currentExpenses = ref(0)
+    const enteredExpense = ref(0)
+    const remainingFunds = computed(function() { return availableFunds.value - currentExpenses.value })
+    const addExpense = function() { currentExpenses.value += enteredExpense.value }
+    watch(remainingFunds, (newValue) => {
+      if (newValue < 0) alert('You are broke!')
+    })
+    return { availableFunds, currentExpenses, enteredExpense, remainingFunds, addExpense }
+  }
+}
+
+// export default {
+//   data() {
+//     return {
+//       availableFunds: 100,
+//       currentExpenses: 0,
+//       enteredExpense: 0,
+//     };
+//   },
+//   computed: {
+//     remainingFunds() {
+//       return this.availableFunds - this.currentExpenses;
+//     },
+//   },
+//   methods: {
+//     addExpense() {
+//       this.currentExpenses += this.enteredExpense;
+//     },
+//   },
+//   watch: {
+//     remainingFunds(val) {
+//       if (val < 0) {
+//         alert('You are broke!');
+//       }
+//     },
+//   },
+// };
 </script>
 
 <style>
