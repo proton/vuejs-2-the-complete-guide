@@ -2,10 +2,10 @@
   <h2>My Course Goal</h2>
   <!-- Task 1: Output your main course goal with help of the composition API -->
   <!-- Don't hardcode it into the template, instead hardcode it into the JS code -->
-  {{ myCourseGoal }}
+  <div v-if="goal.visible">{{ goal.text }}</div>
   <h3>OUTPUT COURSE GOAL</h3>
   <!-- Task 2: Toggle (show/ hide) the goal with help of the button  -->
-  <button>Toggle Goal</button>
+  <button @click="toggleGoal">Toggle Goal</button>
   <!-- Task 3: Manage data in three ways -->
   <!-- => Separate refs -->
   <!-- => Ref Object -->
@@ -14,12 +14,15 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
 export default {
   setup() {
-    const myCourseGoal = ref('Get a sertificate')
-    return { myCourseGoal: myCourseGoal }
+    const myCourseGoal = reactive({
+      text: 'Get a sertificate',
+      visible: true
+    })
+    return { goal: myCourseGoal, toggleGoal: function() { myCourseGoal.visible = !myCourseGoal.visible } }
   }
 }
 </script>
